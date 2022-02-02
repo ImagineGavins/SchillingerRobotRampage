@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -26,6 +27,7 @@ namespace Schillinger_RobotRampage
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
             this.graphics.ApplyChanges();
+            this.IsMouseVisible = true;
 
             base.Initialize();
         }
@@ -78,6 +80,17 @@ namespace Schillinger_RobotRampage
             WeaponManager.Draw(spriteBatch);
             Player.Draw(spriteBatch);
             EffectsManager.Draw(spriteBatch);
+            // Temp ----- (Makes Shortest Distance tiles visible)
+            Vector2 mouseLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            mouseLocation += Camera.Position;
+            List<Vector2> path = PathFinder.FindPath(TileMap.GetSquareAtPixel(mouseLocation), TileMap.GetSquareAtPixel(Player.BaseSprite.WorldCenter));
+            if (!(path == null))
+            {
+                foreach (Vector2 node in path)
+                {
+                    spriteBatch.Draw(spriteSheet, TileMap.SquareScreenRectangle((int)node.X, (int)node.Y), new Rectangle(0, 288, 32, 32), new Color(128, 0, 0, 80));
+                }
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

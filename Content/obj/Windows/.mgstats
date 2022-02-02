@@ -1,0 +1,6 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Fonts/Pericles14.spritefont","C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/bin/Windows/Fonts/Pericles14.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21521,0.2074748
+"C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/FireTile.png","C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/bin/Windows/Textures/FireTile.xnb","TextureProcessor","Texture2DContent",1275,16469,0.0120119
+"C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/SpriteSheet.png","C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/bin/Windows/Textures/SpriteSheet.xnb","TextureProcessor","Texture2DContent",18930,409685,0.0930854
+"C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/TitleScreen.png","C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/bin/Windows/Textures/TitleScreen.xnb","TextureProcessor","Texture2DContent",1145028,3145813,0.098919
+"C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/WaterTile.png","C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/bin/Windows/Textures/WaterTile.xnb","TextureProcessor","Texture2DContent",2079,24661,0.0030015

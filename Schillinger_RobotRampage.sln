@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schillinger_RobotRampage", "Schillinger_RobotRampage.csproj", "{85F30D08-35D0-400C-BA81-7377879CF551}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85F30D08-35D0-400C-BA81-7377879CF551}.Debug|x86.ActiveCfg = Debug|x86
+		{85F30D08-35D0-400C-BA81-7377879CF551}.Debug|x86.Build.0 = Debug|x86
+		{85F30D08-35D0-400C-BA81-7377879CF551}.Release|x86.ActiveCfg = Release|x86
+		{85F30D08-35D0-400C-BA81-7377879CF551}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0204B2B-B3FE-43FB-A264-7DB7A9D88ABB}
+	EndGlobalSection
+EndGlobal

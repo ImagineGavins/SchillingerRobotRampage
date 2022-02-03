@@ -171,6 +171,7 @@ namespace Schillinger_RobotRampage
                 else
                 {
                     createLargeExplosion(shot.WorldCenter);
+                    checkRocketSplashDamage(shot.WorldCenter);
                 }
             }
         }
@@ -196,6 +197,54 @@ namespace Schillinger_RobotRampage
                 }
             }
         }
+
+        private static void checkShotEnemyImpacts(Sprite shot)
+        {
+            if(shot.Expired) { return; }
+
+            foreach(Enemy enemy in EnemyManager.Enemies)
+            {
+                if(!enemy.Destroyed)
+                {
+                    if(shot.IsCircleColliding(enemy.EnemyBase.WorldCenter, enemy.EnemyBase.CollisionRadius))
+                    {
+                        shot.Expired = true;
+                        enemy.Destroyed = true;
+                        GameManager.Score += 10;
+                        if(shot.Frame == 0)
+                        {
+                            EffectsManager.AddExplosion(enemy.EnemyBase.WorldCenter, enemy.EnemyBase.Velocity / 30);
+                        }
+                        else
+                        {
+                            if(shot.Frame == 1)
+                            {
+                                createLargeExplosion(shot.WorldCenter);
+                                checkRocketSplashDamage(shot.WorldCenter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void checkRocketSplashDamage(Vector2 location)
+        {
+            int rocketSplashRadius = 40;
+
+            foreach(Enemy enemy in EnemyManager.Enemies)
+            {
+                if(!enemy.Destroyed)
+                {
+                    if(enemy.EnemyBase.IsCircleColliding(location, rocketSplashRadius))
+                    {
+                        enemy.Destroyed = true;
+                        GameManager.Score += 10;
+                        EffectsManager.AddExplosion(enemy.EnemyBase.WorldCenter, Vector2.Zero);
+                    }
+                }
+            }
+        }
         #endregion
 
         #region ~UpdateAndDraw~
@@ -209,6 +258,7 @@ namespace Schillinger_RobotRampage
             {
                 Shots[x].Update(gameTime);
                 checkShotWallImpacts(Shots[x]);
+                checkShotEnemyImpacts(Shots[x]);
 
                 if(Shots[x].Expired)
                 {

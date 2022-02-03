@@ -67,6 +67,7 @@ namespace Schillinger_RobotRampage
                     {
                         terminal.Deactivate();
                         activeCount--;
+                        GameManager.Score += 100;
                     }
                 }
             }

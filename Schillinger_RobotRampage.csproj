@@ -47,6 +47,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="GoalManager.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="PathFinder.cs" />

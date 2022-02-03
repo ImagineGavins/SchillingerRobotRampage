@@ -27,7 +27,7 @@ namespace Schillinger_RobotRampage
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
             this.graphics.ApplyChanges();
-            this.IsMouseVisible = true;
+            //this.IsMouseVisible = true;
 
             base.Initialize();
         }
@@ -46,9 +46,12 @@ namespace Schillinger_RobotRampage
             Camera.ViewPortWidth = 800;
             Camera.ViewPortHeight = 600;
 
-            Player.Initialize(spriteSheet, new Rectangle(0, 64, 32, 32), 6, new Rectangle(0, 96, 32, 32), 1, new Vector2(300, 300));
+            Player.Initialize(spriteSheet, new Rectangle(0, 64, 32, 32), 6, new Rectangle(0, 96, 32, 32), 1, new Vector2(32, 32));
             TileMap.Initialize(spriteSheet);
             EffectsManager.Initialize(spriteSheet, new Rectangle(0, 288, 2, 2), new Rectangle(0, 256, 32, 32), 3);
+            GoalManager.Initialize(spriteSheet, new Rectangle(0, 7 * 32, 32, 32), new Rectangle(3 * 32, 7 * 32, 32, 32), 3, 1);
+            GoalManager.GenerateComputers(10);
+            EnemyManager.Initialize(spriteSheet, new Rectangle(0, 160, 32, 32));
         }
 
         protected override void UnloadContent()
@@ -66,13 +69,15 @@ namespace Schillinger_RobotRampage
             Player.Update(gameTime);
             WeaponManager.Update(gameTime);
             EffectsManager.Update(gameTime);
+            GoalManager.Update(gameTime);
+            EnemyManager.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             // Temp Code
             spriteBatch.Begin();
             this.Window.Title = Player.playerHP.ToString();
@@ -80,17 +85,19 @@ namespace Schillinger_RobotRampage
             WeaponManager.Draw(spriteBatch);
             Player.Draw(spriteBatch);
             EffectsManager.Draw(spriteBatch);
+            GoalManager.Draw(spriteBatch);
+            EnemyManager.Draw(spriteBatch);
             // Temp ----- (Makes Shortest Distance tiles visible)
-            Vector2 mouseLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-            mouseLocation += Camera.Position;
-            List<Vector2> path = PathFinder.FindPath(TileMap.GetSquareAtPixel(mouseLocation), TileMap.GetSquareAtPixel(Player.BaseSprite.WorldCenter));
-            if (!(path == null))
-            {
-                foreach (Vector2 node in path)
-                {
-                    spriteBatch.Draw(spriteSheet, TileMap.SquareScreenRectangle((int)node.X, (int)node.Y), new Rectangle(0, 288, 32, 32), new Color(128, 0, 0, 80));
-                }
-            }
+            //Vector2 mouseLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            //mouseLocation += Camera.Position;
+            //List<Vector2> path = PathFinder.FindPath(TileMap.GetSquareAtPixel(mouseLocation), TileMap.GetSquareAtPixel(Player.BaseSprite.WorldCenter));
+            //if (!(path == null))
+            //{
+            //    foreach (Vector2 node in path)
+            //    {
+            //        spriteBatch.Draw(spriteSheet, TileMap.SquareScreenRectangle((int)node.X, (int)node.Y), new Rectangle(0, 288, 32, 32), new Color(128, 0, 0, 80));
+            //    }
+            //}
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -15,7 +15,9 @@ namespace Schillinger_RobotRampage
         Texture2D titleScreen;
         SpriteFont pericles14;
 
-        enum GameStates { TitleScreen, Playing, WaveComplete, GameOver };
+        bool isDead = false;
+
+        enum GameStates { TitleScreen, Playing, LosingLife, WaveComplete, GameOver };
         GameStates gameState = GameStates.TitleScreen;
 
         float gameOverTimer = 0.0f;
@@ -23,6 +25,9 @@ namespace Schillinger_RobotRampage
 
         float waveCompleteTimer = 0.0f;
         float waveCompleteDelay = 6.0f;
+
+        float losingLifeTimer = 0.0f;
+        float losingLifeDelay = 6.0f;
         #endregion
 
         public Game1()
@@ -81,6 +86,7 @@ namespace Schillinger_RobotRampage
                         gameState = GameStates.Playing;
                     }
                     break;
+
                 case GameStates.Playing:
                     Player.Update(gameTime);
                     WeaponManager.Update(gameTime);
@@ -88,10 +94,37 @@ namespace Schillinger_RobotRampage
                     EffectsManager.Update(gameTime);
                     GoalManager.Update(gameTime);
 
-                    if(Player.playerHP <= 0) { gameState = GameStates.GameOver; }
-        
+                    checkPlayerDeath();
+
+                    if (Player.playerHP <= 0 && Player.playerLives <= 0) 
+                    {
+                        gameState = GameStates.GameOver;
+                    }
+                    else if(Player.playerHP <= 0)
+                    {
+                        isDead = true;
+                        gameState = GameStates.LosingLife;
+                    }
+
                     if(GoalManager.ActiveTerminals == 0) { gameState = GameStates.WaveComplete; }
                     break;
+
+                case GameStates.LosingLife:
+                    losingLifeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    
+                    if (isDead)
+                    {
+                        isDead = false;
+                        GameManager.LoseLife();
+                    }
+                    if (losingLifeTimer > losingLifeDelay)
+                    {
+                        GameManager.NewLife();
+                        gameState = GameStates.Playing;
+                        losingLifeTimer = 0.0f;
+                    }
+                    break;
+
                 case GameStates.WaveComplete:
                     waveCompleteTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -128,7 +161,7 @@ namespace Schillinger_RobotRampage
             {
                 spriteBatch.Draw(titleScreen, new Rectangle(0, 0, 800, 600), Color.White);
             }
-            if((gameState == GameStates.Playing) || (gameState == GameStates.WaveComplete) || (gameState == GameStates.GameOver))
+            if((gameState == GameStates.Playing) || (gameState == GameStates.LosingLife) || (gameState == GameStates.WaveComplete) || (gameState == GameStates.GameOver))
             {
                 this.Window.Title = Player.playerHP.ToString();
                 TileMap.Draw(spriteBatch);
@@ -138,9 +171,8 @@ namespace Schillinger_RobotRampage
                 EffectsManager.Draw(spriteBatch);
                 GoalManager.Draw(spriteBatch);
 
-                checkPlayerDeath();
-
                 spriteBatch.DrawString(pericles14, "Score: " + GameManager.Score.ToString(), new Vector2(30, 5), Color.White);
+                spriteBatch.DrawString(pericles14, "Lives: " + Player.playerLives.ToString(), new Vector2(30, 20), Color.White);
 
                 spriteBatch.DrawString(pericles14, "Terminals Remaining: " + GoalManager.ActiveTerminals, new Vector2(520, 5), Color.White);
             }
@@ -177,7 +209,8 @@ namespace Schillinger_RobotRampage
             {
                 if(enemy.EnemyBase.IsCircleColliding(Player.BaseSprite.WorldCenter, Player.BaseSprite.CollisionRadius))
                 {
-                    gameState = GameStates.GameOver;
+                    isDead = true;
+                    gameState = GameStates.LosingLife;
                 }
             }
         }

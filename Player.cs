@@ -19,6 +19,7 @@ namespace Schillinger_RobotRampage
         private static Vector2 turretAngle = Vector2.Zero;
         private static float playerSpeed = 90f;
         public static int playerHP = 100;
+        public static int playerLives = 3;
         private static float burnTimer = .5f;
 
         private static Rectangle scrollArea = new Rectangle(350, 250, 100, 100);

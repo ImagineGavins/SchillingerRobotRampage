@@ -39,6 +39,26 @@ namespace Schillinger_RobotRampage
             GoalManager.GenerateComputers(CurrentTerminalCount);
         }
 
+        public static void LoseLife()
+        {
+            EffectsManager.AddExplosion(Player.BaseSprite.WorldCenter, Vector2.Zero); 
+            Player.playerLives -= 1;
+            Player.playerHP = 100;
+        }
+
+        public static void NewLife()
+        {
+            Player.BaseSprite.WorldLocation = PlayerStartLoc;
+            Player.playerHP = 100;
+            Camera.Position = Vector2.Zero;
+            WeaponManager.CurrentWeaponType = WeaponManager.WeaponType.Normal;
+            WeaponManager.Shots.Clear();
+            WeaponManager.PowerUps.Clear();
+            EffectsManager.Effects.Clear();
+            EnemyManager.Enemies.Clear();
+            GoalManager.GenerateComputers(CurrentTerminalCount);
+        }
+
         public static void StartNewGame()
         {
             CurrentWave = 0;

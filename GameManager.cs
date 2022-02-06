@@ -41,6 +41,7 @@ namespace Schillinger_RobotRampage
 
         public static void LoseLife()
         {
+            
             EffectsManager.AddExplosion(Player.BaseSprite.WorldCenter, Vector2.Zero); 
             Player.playerLives -= 1;
             Player.playerHP = 100;

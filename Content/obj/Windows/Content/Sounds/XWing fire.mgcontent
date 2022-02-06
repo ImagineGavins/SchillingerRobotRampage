@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Sounds/XWing fire.wav</SourceFile>
+  <SourceTime>2021-12-10T02:08:40.826531-05:00</SourceTime>
+  <DestFile>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/bin/Windows/Content/Sounds/XWing fire.xnb</DestFile>
+  <DestTime>2022-02-04T17:34:57.9193018-05:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

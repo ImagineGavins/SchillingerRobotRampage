@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Schillinger_RobotRampage
 {
@@ -21,6 +22,7 @@ namespace Schillinger_RobotRampage
         public static int playerHP = 100;
         public static int playerLives = 3;
         private static float burnTimer = .5f;
+        public static bool hasShot = false;
 
         private static Rectangle scrollArea = new Rectangle(350, 250, 100, 100);
         #endregion
@@ -109,34 +111,42 @@ namespace Schillinger_RobotRampage
             if(keyState.IsKeyDown(Keys.NumPad1))
             {
                 keyShots = new Vector2(-1, 1);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad2))
             {
                 keyShots = new Vector2(0, 1);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad3))
             {
                 keyShots = new Vector2(1, 1);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad4))
             {
                 keyShots = new Vector2(-1, 0);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad6))
             {
                 keyShots = new Vector2(1, 0);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad7))
             {
                 keyShots = new Vector2(-1, -1);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad8))
             {
                 keyShots = new Vector2(0, -1);
+                hasShot = true;
             }
             if (keyState.IsKeyDown(Keys.NumPad9))
             {
                 keyShots = new Vector2(1, -1);
+                hasShot = true;
             }
 
             return keyShots;

@@ -20,6 +20,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Pericles14.spritefont
 
+#begin Sounds/XWing fire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/XWing fire.wav
+
 #begin Textures/FireTile.png
 /importer:TextureImporter
 /processor:TextureProcessor

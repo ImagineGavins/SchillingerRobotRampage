@@ -19,11 +19,13 @@ namespace Schillinger_RobotRampage
         static private float shotMinTimer = 0.15f;
         static private float rocketMinTimer = 0.5f;
 
-        public enum WeaponType { Normal, Triple, Rocket };
-        static public WeaponType CurrentWeaponType = WeaponType.Normal;
+        public enum WeaponType { Normal, Triple, Rocket, Shotgun };
+        static public WeaponType CurrentWeaponType = WeaponType.Shotgun;
         static public float WeaponTimeRemaining = 0.0f;
         static private float weaponTimeDefault = 30.0f;
         static private float tripleWeaponSplitAngle = 15;
+        static private float shotgunWeaponSplitAngle = 7.5f;
+        static public float shotgunShotDuration = 0.1f;
 
         static public List<Sprite> PowerUps = new List<Sprite>();
         static private int maxActivePowerups = 5;
@@ -93,6 +95,27 @@ namespace Schillinger_RobotRampage
                 case WeaponType.Rocket:
                     AddShot(location, velocity, 1);
                     break;
+
+                case WeaponType.Shotgun:
+                    AddShot(location, velocity, 0);
+
+                    float shotgunBaseAngle = (float)Math.Atan2(velocity.Y, velocity.X);
+                    float shotgunOffset = MathHelper.ToRadians(shotgunWeaponSplitAngle);
+
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset), (float)Math.Sin(shotgunBaseAngle - shotgunOffset)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset*2), (float)Math.Sin(shotgunBaseAngle - shotgunOffset*2)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset*3), (float)Math.Sin(shotgunBaseAngle - shotgunOffset*3)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset*4), (float)Math.Sin(shotgunBaseAngle - shotgunOffset*4)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset*5), (float)Math.Sin(shotgunBaseAngle - shotgunOffset*5)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle - shotgunOffset*6), (float)Math.Sin(shotgunBaseAngle - shotgunOffset*6)) * velocity.Length(), 0);
+
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset), (float)Math.Sin(shotgunBaseAngle + shotgunOffset)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*2), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*2)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*3), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*3)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*4), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*4)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*5), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*5)) * velocity.Length(), 0);
+                    AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*6), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*6)) * velocity.Length(), 0);
+                    break;
             }
 
             shotTimer = 0.0f;
@@ -127,10 +150,15 @@ namespace Schillinger_RobotRampage
                 newPowerup.Animate = false;
                 newPowerup.CollisionRadius = 14;
                 newPowerup.AddFrame(new Rectangle(96, 128, 32, 32));
+                newPowerup.AddFrame(new Rectangle(128, 128, 32, 32));
 
                 if(type == WeaponType.Rocket)
                 {
                     newPowerup.Frame = 1;
+                }
+                if(type == WeaponType.Shotgun)
+                {
+                    newPowerup.Frame = 2;
                 }
 
                 PowerUps.Add(newPowerup);
@@ -141,14 +169,23 @@ namespace Schillinger_RobotRampage
         private static void checkPowerupSpawns(float elapsed)
         {
             timeSinceLastPowerup += elapsed;
+            int random = rand.Next(0, 3);
 
             if (timeSinceLastPowerup >= timeBetweenPowerups)
             {
                 WeaponType type = WeaponType.Triple;
 
-                if (rand.Next(0, 2) == 1)
+                if (random == 1)
+                {
+                    type = WeaponType.Triple;
+                }
+                else if(random == 2)
                 {
                     type = WeaponType.Rocket;
+                }
+                else
+                {
+                    type = WeaponType.Shotgun;
                 }
 
                 tryToSpawnPowerup(rand.Next(0, TileMap.MapWidth), rand.Next(0, TileMap.MapHeight), type);
@@ -189,6 +226,9 @@ namespace Schillinger_RobotRampage
                             break;
                         case 1:
                             CurrentWeaponType = WeaponType.Rocket;
+                            break;
+                        case 2:
+                            CurrentWeaponType = WeaponType.Shotgun;
                             break;
                     }
 
@@ -259,6 +299,15 @@ namespace Schillinger_RobotRampage
                 Shots[x].Update(gameTime);
                 checkShotWallImpacts(Shots[x]);
                 checkShotEnemyImpacts(Shots[x]);
+                if(Player.hasShot == true)
+                {
+                    shotgunShotDuration -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if((CurrentWeaponType == WeaponType.Shotgun) && (shotgunShotDuration <= 0))
+                    {
+                        Shots[x].Expired = true;
+                        shotgunShotDuration = 0.1f;
+                    }
+                }
 
                 if(Shots[x].Expired)
                 {

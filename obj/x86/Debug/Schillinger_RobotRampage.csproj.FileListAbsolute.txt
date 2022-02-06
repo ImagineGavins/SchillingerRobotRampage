@@ -54,3 +54,4 @@ C:\Code\2DGameEngineDev\Schillinger_RobotRampage\SchillingerRobotRampage\obj\x86
 C:\Code\2DGameEngineDev\Schillinger_RobotRampage\SchillingerRobotRampage\obj\x86\Debug\Schillinger_RobotRampage.csproj.CopyComplete
 C:\Code\2DGameEngineDev\Schillinger_RobotRampage\SchillingerRobotRampage\obj\x86\Debug\Schillinger_Lab3_RobotRampage.exe
 C:\Code\2DGameEngineDev\Schillinger_RobotRampage\SchillingerRobotRampage\obj\x86\Debug\Schillinger_Lab3_RobotRampage.pdb
+C:\Code\2DGameEngineDev\Schillinger_RobotRampage\SchillingerRobotRampage\bin\Windows\x86\Debug\Content\Sounds\XWing fire.xnb

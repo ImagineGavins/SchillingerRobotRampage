@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Schillinger_RobotRampage
 {
@@ -9,6 +10,7 @@ namespace Schillinger_RobotRampage
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SoundManager soundManager;
 
         #region ~Declarations~
         Texture2D spriteSheet;
@@ -30,6 +32,16 @@ namespace Schillinger_RobotRampage
         float losingLifeDelay = 6.0f;
         #endregion
 
+        #region ~Sounds~
+        SoundEffect shotSE;
+        SoundEffect explosionSE;
+
+        SoundEffectInstance shotSEI;
+        SoundEffectInstance explosionSEI;
+
+        public Dictionary<string, SoundEffectInstance> sounds;
+        #endregion
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,6 +50,7 @@ namespace Schillinger_RobotRampage
 
         protected override void Initialize()
         {
+            soundManager = new SoundManager(this);
             this.graphics.PreferredBackBufferWidth = 800;
             this.graphics.PreferredBackBufferHeight = 600;
             this.graphics.ApplyChanges();
@@ -55,6 +68,8 @@ namespace Schillinger_RobotRampage
             titleScreen = Content.Load<Texture2D>(@"Textures\TitleScreen");
             pericles14 = Content.Load<SpriteFont>(@"Fonts\Pericles14");
             WeaponManager.Texture = spriteSheet;
+
+            
 
             Camera.WorldRectangle = new Rectangle(0, 0, 1600, 1600);
             Camera.ViewPortWidth = 800;

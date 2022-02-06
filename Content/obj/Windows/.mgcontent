@@ -4,13 +4,15 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Fonts/Pericles14.spritefont</File>
-    <File>C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/FireTile.png</File>
-    <File>C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/SpriteSheet.png</File>
-    <File>C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/TitleScreen.png</File>
-    <File>C:/Code/2DGameEngineDev/Schillinger_Lab3_RobotRampage/Content/Textures/WaterTile.png</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Fonts/Pericles14.spritefont</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Sounds/XWing fire.wav</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/FireTile.png</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/SpriteSheet.png</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/TitleScreen.png</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/WaterTile.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

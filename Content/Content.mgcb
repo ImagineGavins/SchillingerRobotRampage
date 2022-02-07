@@ -20,6 +20,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Pericles14.spritefont
 
+#begin Sounds/TIE fighter explode.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/TIE fighter explode.wav;Sounds/Explosion.wav
+
 #begin Sounds/XWing fire.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

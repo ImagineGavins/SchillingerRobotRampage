@@ -108,45 +108,49 @@ namespace Schillinger_RobotRampage
         {
             Vector2 keyShots = Vector2.Zero;
 
-            if(keyState.IsKeyDown(Keys.NumPad1))
+            if(keyState.IsKeyDown(Keys.NumPad1) && hasShot == false)
             {
                 keyShots = new Vector2(-1, 1);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad2))
+            else if (keyState.IsKeyDown(Keys.NumPad2) && hasShot == false)
             {
                 keyShots = new Vector2(0, 1);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad3))
+            else if (keyState.IsKeyDown(Keys.NumPad3) && hasShot == false)
             {
                 keyShots = new Vector2(1, 1);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad4))
+            else if (keyState.IsKeyDown(Keys.NumPad4) && hasShot == false)
             {
                 keyShots = new Vector2(-1, 0);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad6))
+            else if (keyState.IsKeyDown(Keys.NumPad6) && hasShot == false)
             {
                 keyShots = new Vector2(1, 0);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad7))
+            else if (keyState.IsKeyDown(Keys.NumPad7) && hasShot == false)
             {
                 keyShots = new Vector2(-1, -1);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad8))
+            else if (keyState.IsKeyDown(Keys.NumPad8) && hasShot == false)
             {
                 keyShots = new Vector2(0, -1);
                 hasShot = true;
             }
-            if (keyState.IsKeyDown(Keys.NumPad9))
+            else if (keyState.IsKeyDown(Keys.NumPad9) && hasShot == false)
             {
                 keyShots = new Vector2(1, -1);
                 hasShot = true;
+            }
+            else
+            {
+                hasShot = false;
             }
 
             return keyShots;

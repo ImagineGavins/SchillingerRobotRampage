@@ -39,7 +39,7 @@ namespace Schillinger_RobotRampage
         SoundEffectInstance shotSEI;
         SoundEffectInstance explosionSEI;
 
-        public Dictionary<string, SoundEffectInstance> sounds;
+        List<SoundEffectInstance> shots;
         #endregion
 
         public Game1()
@@ -69,7 +69,12 @@ namespace Schillinger_RobotRampage
             pericles14 = Content.Load<SpriteFont>(@"Fonts\Pericles14");
             WeaponManager.Texture = spriteSheet;
 
-            
+            WeaponManager.shotSE = Content.Load<SoundEffect>(@"Sounds\XWing fire");
+            WeaponManager.shotSEI = WeaponManager.shotSE.CreateInstance();
+            WeaponManager.shots = new List<SoundEffectInstance>();
+            WeaponManager.explosionSE = Content.Load<SoundEffect>(@"Sounds\Explosion");
+            WeaponManager.explosionSEI = WeaponManager.explosionSE.CreateInstance();
+            WeaponManager.explosions = new List<SoundEffectInstance>();
 
             Camera.WorldRectangle = new Rectangle(0, 0, 1600, 1600);
             Camera.ViewPortWidth = 800;
@@ -118,6 +123,10 @@ namespace Schillinger_RobotRampage
                     else if(Player.playerHP <= 0)
                     {
                         isDead = true;
+                        SoundEffectInstance tempExplosion = WeaponManager.explosionSE.CreateInstance();
+                        WeaponManager.explosions.Add(tempExplosion);
+                        WeaponManager.explosions[WeaponManager.explosions.Count - 1].Volume = 0.5f;
+                        WeaponManager.explosions[WeaponManager.explosions.Count - 1].Play();
                         gameState = GameStates.LosingLife;
                     }
 
@@ -127,6 +136,7 @@ namespace Schillinger_RobotRampage
                 case GameStates.LosingLife:
                     losingLifeTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     
+
                     if (isDead)
                     {
                         isDead = false;
@@ -225,6 +235,10 @@ namespace Schillinger_RobotRampage
                 if(enemy.EnemyBase.IsCircleColliding(Player.BaseSprite.WorldCenter, Player.BaseSprite.CollisionRadius))
                 {
                     isDead = true;
+                    SoundEffectInstance tempExplosion = WeaponManager.explosionSE.CreateInstance();
+                    WeaponManager.explosions.Add(tempExplosion);
+                    WeaponManager.explosions[WeaponManager.explosions.Count - 1].Volume = 0.5f;
+                    WeaponManager.explosions[WeaponManager.explosions.Count - 1].Play();
                     gameState = GameStates.LosingLife;
                 }
             }

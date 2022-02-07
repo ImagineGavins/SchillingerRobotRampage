@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Schillinger_RobotRampage
 {
@@ -15,8 +16,8 @@ namespace Schillinger_RobotRampage
         static public Texture2D Texture;
         static public Rectangle shotRectangle = new Rectangle(0, 128, 32, 32);
         static public float WeaponSpeed = 600f;
-        static private float shotTimer = 0f;
-        static private float shotMinTimer = 0.15f;
+        static public float shotTimer = 0f;
+        static public float shotMinTimer = 0.15f;
         static private float rocketMinTimer = 0.5f;
 
         public enum WeaponType { Normal, Triple, Rocket, Shotgun };
@@ -25,13 +26,20 @@ namespace Schillinger_RobotRampage
         static private float weaponTimeDefault = 30.0f;
         static private float tripleWeaponSplitAngle = 15;
         static private float shotgunWeaponSplitAngle = 7.5f;
-        static public float shotgunShotDuration = 0.1f;
+        static public float shotgunShotDuration = 0.08f;
 
         static public List<Sprite> PowerUps = new List<Sprite>();
         static private int maxActivePowerups = 5;
         static private float timeSinceLastPowerup = 0.0f;
         static private float timeBetweenPowerups = 2.0f;
         static private Random rand = new Random();
+
+        static public SoundEffect shotSE;
+        static public SoundEffectInstance shotSEI;          
+        static public List<SoundEffectInstance> shots;
+        static public SoundEffect explosionSE;
+        static public SoundEffectInstance explosionSEI;          
+        static public List<SoundEffectInstance> explosions;
         #endregion
 
         #region ~Properties~
@@ -117,6 +125,10 @@ namespace Schillinger_RobotRampage
                     AddShot(location, new Vector2((float)Math.Cos(shotgunBaseAngle + shotgunOffset*6), (float)Math.Sin(shotgunBaseAngle + shotgunOffset*6)) * velocity.Length(), 0);
                     break;
             }
+
+            SoundEffectInstance tempShot = shotSE.CreateInstance();
+            shots.Add(tempShot);
+            shots[shots.Count - 1].Play();
 
             shotTimer = 0.0f;
         }
@@ -209,6 +221,10 @@ namespace Schillinger_RobotRampage
                 {
                     createLargeExplosion(shot.WorldCenter);
                     checkRocketSplashDamage(shot.WorldCenter);
+                    SoundEffectInstance tempExplosion = explosionSE.CreateInstance();
+                    explosions.Add(tempExplosion);
+                    explosions[explosions.Count - 1].Volume = 0.5f;
+                    explosions[explosions.Count - 1].Play();
                 }
             }
         }
@@ -263,6 +279,10 @@ namespace Schillinger_RobotRampage
                                 checkRocketSplashDamage(shot.WorldCenter);
                             }
                         }
+                        SoundEffectInstance tempExplosion = explosionSE.CreateInstance();
+                        explosions.Add(tempExplosion);
+                        explosions[explosions.Count - 1].Volume = 0.5f;
+                        explosions[explosions.Count - 1].Play();
                     }
                 }
             }
@@ -305,7 +325,7 @@ namespace Schillinger_RobotRampage
                     if((CurrentWeaponType == WeaponType.Shotgun) && (shotgunShotDuration <= 0))
                     {
                         Shots[x].Expired = true;
-                        shotgunShotDuration = 0.1f;
+                        shotgunShotDuration = 0.08f;
                     }
                 }
 

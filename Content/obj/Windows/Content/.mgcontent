@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Fonts/Pericles14.spritefont</File>
+    <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Sounds/TIE fighter explode.wav</File>
     <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Sounds/XWing fire.wav</File>
     <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/FireTile.png</File>
     <File>C:/Code/2DGameEngineDev/Schillinger_RobotRampage/SchillingerRobotRampage/Content/Textures/SpriteSheet.png</File>
@@ -13,6 +14,7 @@
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
+    <File>Sounds/Explosion.wav</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
